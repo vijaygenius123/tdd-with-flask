@@ -6,6 +6,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    entrypoint: ['/usr/src/app/entrypoint.sh']
     volumes:
       - .:/usr/src/app
     ports:
@@ -17,12 +18,12 @@ services:
     depends_on:
       - users-db
 
-    users-db:
-      build:
-        context: ./project/db
-        dockerfile: Dockerfile
-      expose:
-        - 5432
-      environment:
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=postgres
+  users-db:
+    build:
+      context: ./project/db
+      dockerfile: Dockerfile
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
